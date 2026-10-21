@@ -91,6 +91,22 @@ $create_contacts = $db_connection->prepare(
 $create_contacts->execute();
 $create_contacts->close();
 
+/*Classification*/
+$create_classification = $db_connection->prepare(
+	"CREATE OR REPLACE TABLE Classification(
+        class_id int(11) NOT NULL AUTO_INCREMENT,
+        class_name varchar(100) NOT NULL,
+        PRIMARY KEY(class_id));");
+$create_classification->execute();
+$create_classification->close();
+
+/*Organization*/
+$create_organization = $db_connection->prepare(
+        "CREATE OR REPLACE TABLE Organization(
+        org_id int(11) NOT NULL AUTO_INCREMENT,
+        org_name varchar(50) NOT NULL,
+        PRIMARY KEY(org_id));");
+
 /* Below Are Tables That Have Foreign Keys */
 /* ------------------------------------------ */
 
@@ -117,6 +133,19 @@ $create_credentials = $db_connection->prepare(
         FOREIGN KEY(user_id) REFERENCES Users(user_id));");
 $create_credentials->execute();
 $create_credentials->close();
+
+/*Rank*/
+$create_rank = $db_connection->prepare(
+        "CREATE OR REPLACE TABLE Rank(
+        rank_id int(11) NOT NULL AUTO_INCREMENT,
+        rank_title varchar(100) NOT NULL,
+        min salary decimal(8,2) NOT NULL,
+        max salary decimal(8,2) NOT NULL,
+        class_id int(11) NOT NULL,
+        FOREIGN KEY(class_id) REFERENCES Classification(class_id),
+        PRIMARY KEY(rank_id));");
+$create_rank->execute();
+$create_rank->close();
 
 /* Status Display */
 echo nl2br("The database tables were successfully created.\r\n");

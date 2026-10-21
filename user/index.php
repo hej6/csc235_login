@@ -66,7 +66,7 @@ ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
       </div>
       <hr class="mb-4">
       <section class="mb-4">
-      <h2>User Information</h2>
+      <h2>Staff Information</h2>
       <table class="table">
   <thead>
     <tr>

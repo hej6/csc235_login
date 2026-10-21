@@ -14,7 +14,7 @@ ini_set('display_errors', 'On');
 /* the first connection to the database */
 DEFINE('DB_HOST', "localhost");
 DEFINE('DB_USER', "root");
-DEFINE('DB_PASSWORD', ""); //Note: this should be your root password
+DEFINE('DB_PASSWORD', "password"); //Note: this should be your root password
 
 // Establish the initial database connection
 try {

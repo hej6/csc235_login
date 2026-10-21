@@ -31,10 +31,10 @@
           <h1>Login</h1>
           <form action="./php/authenticate.php" method="post">
             <div class="input-group mb-3">
-              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="username" placeholder="Enter username" name="username" required>
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="username" placeholder="Username" name="username" required>
             </div>
             <div class="input-group mb-3">
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Password" name="password" required>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
             </div>
             
             <?php include_once (ROOT_PATH . '/php/error_rprt.php'); ?>

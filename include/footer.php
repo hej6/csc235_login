@@ -12,7 +12,7 @@
   <div class="container py-2">
     <div class="row">
       <div class="col-sm fs-6 text-center">
-        <small>&copy; <?php echo date("Y"); // Shows current year ?> CSC 235 Student Name </small>
+        <small>&copy; <?php echo date("Y"); // Shows current year ?> CSC 540 University ORG Chart Database </small>
       </div>
     </div>
   </div>

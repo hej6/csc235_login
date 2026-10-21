@@ -14,7 +14,7 @@ ini_set('display_errors', 'On');
 /* the first connection to the database */
 DEFINE('DB_HOST', "localhost");
 DEFINE('DB_USER', "root");
-DEFINE('DB_PASSWORD', "password"); //Note: this should be your root password
+DEFINE('DB_PASSWORD', ""); //PER JACKIE: previously in "" was "password" but that was giving an error message. 
 
 // Establish the initial database connection
 try {
@@ -136,18 +136,18 @@ $create_credentials = $db_connection->prepare(
 $create_credentials->execute();
 $create_credentials->close();
 
-/*Rank*/
-$create_rank = $db_connection->prepare(
-        "CREATE OR REPLACE TABLE Rank(
-        rank_id int(11) NOT NULL AUTO_INCREMENT,
-        rank_title varchar(100) NOT NULL,
+/*Employee Rank*/
+$create_ranks = $db_connection->prepare(
+        "CREATE OR REPLACE TABLE Ranks(
+        ranks_id int(11) NOT NULL AUTO_INCREMENT,
+        ranks_title varchar(100) NOT NULL,
         min_salary decimal(8,2) NOT NULL,
         max_salary decimal(8,2) NOT NULL,
         class_id int(11) NOT NULL,
         FOREIGN KEY(class_id) REFERENCES Classification(class_id),
         PRIMARY KEY(rank_id));");
-$create_rank->execute();
-$create_rank->close();
+$create_ranks->execute();
+$create_ranks->close();
 
 /* Status Display */
 echo nl2br("The database tables were successfully created.\r\n");

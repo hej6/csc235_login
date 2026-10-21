@@ -145,7 +145,7 @@ $create_ranks = $db_connection->prepare(
         max_salary decimal(8,2) NOT NULL,
         class_id int(11) NOT NULL,
         FOREIGN KEY(class_id) REFERENCES Classification(class_id),
-        PRIMARY KEY(rank_id));");
+        PRIMARY KEY(ranks_id));");
 $create_ranks->execute();
 $create_ranks->close();
 

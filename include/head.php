@@ -24,7 +24,7 @@
 <meta name="author" content="CSC 540 Team Project">
 <link rel="icon" href="./favicon.ico">
 
-<title>Basic Login Application</title>
+<title>University ORG Chart Database</title>
 
 <?php /* Google Fonts - Roboto flex */ ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">

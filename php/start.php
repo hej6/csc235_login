@@ -106,6 +106,8 @@ $create_organization = $db_connection->prepare(
         org_id int(11) NOT NULL AUTO_INCREMENT,
         org_name varchar(50) NOT NULL,
         PRIMARY KEY(org_id));");
+$create_organization->execute();
+$create_organization->close();
 
 /* Below Are Tables That Have Foreign Keys */
 /* ------------------------------------------ */

@@ -139,8 +139,8 @@ $create_rank = $db_connection->prepare(
         "CREATE OR REPLACE TABLE Rank(
         rank_id int(11) NOT NULL AUTO_INCREMENT,
         rank_title varchar(100) NOT NULL,
-        min salary decimal(8,2) NOT NULL,
-        max salary decimal(8,2) NOT NULL,
+        min_salary decimal(8,2) NOT NULL,
+        max_salary decimal(8,2) NOT NULL,
         class_id int(11) NOT NULL,
         FOREIGN KEY(class_id) REFERENCES Classification(class_id),
         PRIMARY KEY(rank_id));");

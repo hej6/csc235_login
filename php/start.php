@@ -295,7 +295,7 @@ $insert_credentials->execute();
 $user_id = 4;
 $username = "jjmCSC540";
 $password_salted = crypt("SCSU2026", $salt);
-//$password_salted = password_hash("alice123", PASSWORD_DEFAULT);
+//$password_salted = password_hash("admin123", PASSWORD_DEFAULT);
 $insert_credentials->execute();
 
 $insert_credentials->close();

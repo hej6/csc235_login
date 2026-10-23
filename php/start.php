@@ -221,6 +221,19 @@ $post_code = 67890;
 $updated = date("Y-m-d H:i:s");
 $insert_contacts->execute();
 
+$contact_id = 4;
+$last_name = "Password";
+$first_name = "Admin";
+$email = "adminpassword@example.com";
+$phone = "555-123-4567";
+$street_1 = "501 Crescent Street";
+$street_2 = "";
+$city = "Another town";
+$state_code = "NH";
+$post_code = 06515;
+$updated = date("Y-m-d H:i:s");
+$insert_contacts->execute();
+
 $insert_contacts->close();
 
 /* Users */
@@ -243,6 +256,12 @@ $insert_users->execute();
 $user_id = 3;
 $role_id = 3;
 $contact_id = 3;
+$creation_date = date("Y-m-d H:i:s");
+$insert_users->execute();
+
+$user_id = 4;
+$role_id = 1;
+$contact_id = 4;
 $creation_date = date("Y-m-d H:i:s");
 $insert_users->execute();
 
@@ -271,6 +290,12 @@ $user_id = 3;
 $username = "charliebrown";
 $password_salted = crypt("SCSU2026", $salt);
 //$password_salted = password_hash("charlie123", PASSWORD_DEFAULT);
+$insert_credentials->execute();
+
+$user_id = 4;
+$username = "jjmCSC540";
+$password_salted = crypt("SCSU2026", $salt);
+//$password_salted = password_hash("alice123", PASSWORD_DEFAULT);
 $insert_credentials->execute();
 
 $insert_credentials->close();

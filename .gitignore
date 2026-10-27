@@ -1,0 +1,31 @@
+# Dependencies
+/vendor/
+composer.phar
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+config/config.local.php
+*.secret
+
+# Logs & Cache
+*.log
+/logs/
+/tmp/
+/cache/
+.phpunit.result.cache
+
+# IDE & Editor Files
+.idea/
+*.iml
+*.sublime-workspace
+*.sublime-project
+.vscode/
+*.swp
+*.swo
+
+# OS & File System Junk
+.DS_Store
+Thumbs.db
+desktop.ini

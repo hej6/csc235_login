@@ -2,7 +2,7 @@
 /vendor/
 composer.phar
 
-# Environment & Secrets
+# Environment & Secrets & Test
 .env
 .env.local
 .env.*.local

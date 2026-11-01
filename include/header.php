@@ -50,7 +50,7 @@ if (!isset($_SESSION)) {
           /* User Information */
           if (isset($_SESSION['user_name']) && $_SESSION['user_role'] == 2) { // Only display when user is logged in
             echo '<li class="nav-item"><a class="nav-link" href="index.php">User Dashboard</a></li>';
-            echo '<li class="nav-item"><a class="nav-link" href="#">New Page</a></li>';
+            echo '<li class="nav-item"><a class="nav-link" href="customer.php">Customer</a></li>';
           }
         ?>
         <?php

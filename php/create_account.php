@@ -5,9 +5,10 @@
 
 include_once (realpath(dirname(__FILE__).'/path.php'));
 include_once (realpath(dirname(__FILE__).'/config.php'));
+include_once (realpath(dirname(__FILE__).'/config.local.php'));
 
 /* Salt used for seasoning */
-$salt = 'authentication';
+$salt = SALT;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // collect value of input field

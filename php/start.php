@@ -12,10 +12,17 @@ error_reporting(-1);
 ini_set('display_errors', 'On');
 
 /* the first connection to the database */
+
 DEFINE('DB_HOST', "localhost");
 DEFINE('DB_USER', "root");
 DEFINE('DB_PASSWORD', ""); //PER JACKIE: previously in "" was "password" but that was giving an error message. 
 
+//DEFINE('DB_HOST', "localhost");
+//DEFINE('DB_USER', "root");
+//DEFINE('DB_PASSWORD', ""); //Note: this should be your root password
+
+
+include_once (ROOT_PATH.'/php/config.local.php');
 // Establish the initial database connection
 try {
   $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD)
@@ -25,9 +32,9 @@ try {
 }
 
 /* Check if database is there or will create it */
-$create_stmt = "CREATE DATABASE IF NOT EXISTS login_db";
+$create_stmt = "CREATE DATABASE IF NOT EXISTS DB_NAME";
 
-/* Check if database drop was sucessful */
+/* Check if database creation was successful */
 if(mysqli_query($db_connection, $create_stmt)) {
 	echo nl2br("Database was successfully created.\r\n");
 } else {
@@ -38,7 +45,7 @@ $prep_stmt->execute();
 $prep_stmt->close();
 
 /* Change to the created database */
-$db_connection->select_db("login_db");
+$db_connection->select_db(DB_NAME);
 
 /* Drop all tables for clean install */
 $db_connection->query('SET foreign_key_checks = 0');
@@ -54,7 +61,7 @@ $db_connection->query('SET foreign_key_checks = 1');
 
 
 /* Salt used for seasoning */
-$salt = 'authentication';
+$salt = SALT;
 
 //-----------------------------------------------------
 // Create Database Tables
@@ -151,6 +158,7 @@ $create_ranks->close();
 
 /* Status Display */
 echo nl2br("The database tables were successfully created.\r\n");
+
 
 
 //-----------------------------------------------------

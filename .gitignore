@@ -1,12 +1,14 @@
+
 # Dependencies
 /vendor/
 composer.phar
 
-# Environment & Secrets & Test
+# Environment & Secrets
 .env
 .env.local
 .env.*.local
 config/config.local.php
+config.local.php
 *.secret
 
 # Logs & Cache
@@ -16,12 +18,21 @@ config/config.local.php
 /cache/
 .phpunit.result.cache
 
+# User Uploads & Dynamic Assets
+/uploads/
+/public/uploads/
+/storage/
+
 # IDE & Editor Files
 .idea/
+.vscode/
 *.iml
 *.sublime-workspace
 *.sublime-project
-.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
 *.swp
 *.swo
 

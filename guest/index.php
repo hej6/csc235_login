@@ -31,7 +31,7 @@
   <div class="row align-items-center">
     
     <div class="col">
-      <h1>Welcome Guest <?php echo $user_name; ?></h1>
+      <h1>Welcome Guest <?php echo $_SESSION['user_name']; ?></h1
     </div>
     
   </div>

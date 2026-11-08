@@ -8,43 +8,25 @@
  * @version   1.0
  */
 
+// Development-only database reset script. Running this deletes local table data.
 error_reporting(-1);
 ini_set('display_errors', 'On');
 
-/* the first connection to the database */
+require_once __DIR__ . '/config.local.php';
 
-DEFINE('DB_HOST', "localhost");
-DEFINE('DB_USER', "root");
-DEFINE('DB_PASSWORD', ""); //PER JACKIE: previously in "" was "password" but that was giving an error message. 
-
-//DEFINE('DB_HOST', "localhost");
-//DEFINE('DB_USER', "root");
-//DEFINE('DB_PASSWORD', ""); //Note: this should be your root password
-
-
-include_once (ROOT_PATH.'/php/config.local.php');
-// Establish the initial database connection
+// Establish a connection to the local MySQL server.
 try {
-  $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD)
-    OR die("Connection failed: " . $db_connection->connect_error);
-} catch (Exception $e) {
-  echo 'Caught exception: ',  $e->getMessage(), nl2br("\r\n");
+    $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD);
+} catch (mysqli_sql_exception $e) {
+    die('Connection failed: ' . $e->getMessage());
 }
 
-/* Check if database is there or will create it */
-$create_stmt = "CREATE DATABASE IF NOT EXISTS DB_NAME";
+// Create the database defined in config.local.php if needed
+$create_stmt = "CREATE DATABASE IF NOT EXISTS `" . str_replace('`', '``', DB_NAME) . "`";
+$db_connection->query($create_stmt);
+echo nl2br("Database was successfully created or already exists.\r\n");
 
-/* Check if database creation was successful */
-if(mysqli_query($db_connection, $create_stmt)) {
-	echo nl2br("Database was successfully created.\r\n");
-} else {
-	echo "Error dropping database: " . mysqli_error() . nl2br("\r\n");
-}
-$prep_stmt = $db_connection -> prepare($create_stmt);
-$prep_stmt->execute();
-$prep_stmt->close();
-
-/* Change to the created database */
+// Select the application database, then reset its tables
 $db_connection->select_db(DB_NAME);
 
 /* Drop all tables for clean install */
@@ -59,264 +41,20 @@ if ($result = $db_connection->query("SHOW TABLES")) {
 }
 $db_connection->query('SET foreign_key_checks = 1');
 
-
-/* Salt used for seasoning */
 $salt = SALT;
+define('DB_SETUP_RUNNING', true);
+echo nl2br("Table creation and seed data initialization started.\r\n");
 
-//-----------------------------------------------------
-// Create Database Tables
-//-----------------------------------------------------
-echo "Table creation started." . nl2br("\r\n");
+// Execute in dependency order: referenced tables and records first; Organized by TABLE
+require __DIR__ . '/database/roles.php';
+require __DIR__ . '/database/contacts.php';
+require __DIR__ . '/database/classification.php';
+require __DIR__ . '/database/organization.php';
+require __DIR__ . '/database/ranks.php';
+require __DIR__ . '/database/users.php';
+require __DIR__ . '/database/credentials.php';
 
-/* Below Are Tables That Have Only Primary Keys */
-/* ------------------------------------------ */
-
-/* Role */
-$create_roles = $db_connection->prepare(
-	"CREATE OR REPLACE TABLE Roles(
-        role_id int NOT NULL AUTO_INCREMENT,
-        role_type varchar(255) NOT NULL,
-        PRIMARY KEY(role_id));");
-$create_roles->execute();
-$create_roles->close();
-
-/* Contacts */
-$create_contacts = $db_connection->prepare(
-	"CREATE OR REPLACE TABLE Contacts(
-        contact_id int NOT NULL AUTO_INCREMENT,
-        last_name varchar(255) NOT NULL,
-        first_name varchar(255) NOT NULL,
-        email varchar(255) NOT NULL,
-        phone varchar(255) NOT NULL,
-        street_1 varchar(255),
-        street_2 varchar(255),
-        city varchar(255),
-        state_code varchar(255),
-        post_code int(5),
-        updated timestamp,
-        PRIMARY KEY(contact_id));");
-$create_contacts->execute();
-$create_contacts->close();
-
-/*Classification*/
-$create_classification = $db_connection->prepare(
-	"CREATE OR REPLACE TABLE Classification(
-        class_id int(11) NOT NULL AUTO_INCREMENT,
-        class_name varchar(100) NOT NULL,
-        PRIMARY KEY(class_id));");
-$create_classification->execute();
-$create_classification->close();
-
-/*Organization*/
-$create_organization = $db_connection->prepare(
-        "CREATE OR REPLACE TABLE Organization(
-        org_id int(11) NOT NULL AUTO_INCREMENT,
-        org_name varchar(50) NOT NULL,
-        PRIMARY KEY(org_id));");
-$create_organization->execute();
-$create_organization->close();
-
-/* Below Are Tables That Have Foreign Keys */
-/* ------------------------------------------ */
-
-/* Users */
-$create_users = $db_connection->prepare(
-	"CREATE OR REPLACE TABLE Users(
-        user_id int NOT NULL AUTO_INCREMENT,
-        role_id int NOT NULL,
-        contact_id int NOT NULL,
-	    creation_date timestamp,
-	    PRIMARY KEY(user_id),
-        FOREIGN KEY(role_id) REFERENCES Roles(role_id),
-        FOREIGN KEY(contact_id) REFERENCES Contacts(contact_id));");
-$create_users->execute();
-$create_users->close();
-
-/* Credentials */
-$create_credentials = $db_connection->prepare(
-	"CREATE OR REPLACE TABLE Credentials(
-        username varchar(255) NOT NULL,
-	    user_id int NOT NULL,
-        password_salted varchar(255) NOT NULL,
-	    PRIMARY KEY(username),
-        FOREIGN KEY(user_id) REFERENCES Users(user_id));");
-$create_credentials->execute();
-$create_credentials->close();
-
-/*Employee Rank*/
-$create_ranks = $db_connection->prepare(
-        "CREATE OR REPLACE TABLE Ranks(
-        ranks_id int(11) NOT NULL AUTO_INCREMENT,
-        ranks_title varchar(100) NOT NULL,
-        min_salary decimal(8,2) NOT NULL,
-        max_salary decimal(8,2) NOT NULL,
-        class_id int(11) NOT NULL,
-        FOREIGN KEY(class_id) REFERENCES Classification(class_id),
-        PRIMARY KEY(ranks_id));");
-$create_ranks->execute();
-$create_ranks->close();
-
-/* Status Display */
-echo nl2br("The database tables were successfully created.\r\n");
-
-
-
-//-----------------------------------------------------
-// Populate Tables of Database
-//-----------------------------------------------------
-
-/* Roles */
-$insert_role = $db_connection->prepare(
-	"INSERT INTO Roles
-    	(role_id, role_type) VALUES(?,?);");
-$insert_role->bind_param("is", $role_id, $role_title);
-
-$role_id = 1;
-$role_title = "administrator";
-$insert_role->execute();
-
-$role_id = 2;
-$role_title = "user";
-$insert_role->execute();
-
-$role_id = 3;
-$role_title = "guest";
-$insert_role->execute();
-
-$insert_role->close();
-
-/* Contacts */
-$insert_contacts = $db_connection->prepare(
-	"INSERT INTO Contacts
-		(contact_id, last_name, first_name, email, phone, street_1, street_2, city, state_code, post_code, updated) VALUES(?,?,?,?,?,?,?,?,?,?,?);");
-$insert_contacts->bind_param("issssssssis", $contact_id, $last_name, $first_name, $email, $phone, $street_1, $street_2, $city, $state_code, $post_code, $updated);
-$contact_id = 1;
-$last_name = "Doe";
-$first_name = "John";
-$email = "johndoe@example.com";
-$phone = "123-456-7890";
-$street_1 = "123 Main St";
-$street_2 = "";
-$city = "Anytown";
-$state_code = "CA";
-$post_code = 12345;
-$updated = date("Y-m-d H:i:s");
-$insert_contacts->execute();
-
-$contact_id = 2;
-$last_name = "Smith";
-$first_name = "Jane";
-$email = "janesmith@example.com";
-$phone = "987-654-3210";
-$street_1 = "456 Elm St";
-$street_2 = "Apt 2";
-$city = "Othertown";
-$state_code = "NY";
-$post_code = 54321;
-$updated = date("Y-m-d H:i:s");
-$insert_contacts->execute();
-
-$contact_id = 3;
-$last_name = "Brown";
-$first_name = "Charlie";
-$email = "charliebrown@example.com";
-$phone = "555-555-5555";
-$street_1 = "789 Oak St";
-$street_2 = "";
-$city = "Sometown";
-$state_code = "TX";
-$post_code = 67890;
-$updated = date("Y-m-d H:i:s");
-$insert_contacts->execute();
-
-$contact_id = 4;
-$last_name = "Password";
-$first_name = "Admin";
-$email = "adminpassword@example.com";
-$phone = "555-123-4567";
-$street_1 = "501 Crescent Street";
-$street_2 = "";
-$city = "Another town";
-$state_code = "NH";
-$post_code = 06515;
-$updated = date("Y-m-d H:i:s");
-$insert_contacts->execute();
-
-$insert_contacts->close();
-
-/* Users */
-$insert_users = $db_connection->prepare(
-	"INSERT INTO Users
-		(user_id, role_id, contact_id, creation_date) VALUES(?,?,?,?);");
-$insert_users->bind_param("iiis", $user_id, $role_id, $contact_id, $creation_date);
-$user_id = 1;
-$role_id = 1;
-$contact_id = 1;
-$creation_date = date("Y-m-d H:i:s");
-$insert_users->execute();
-
-$user_id = 2;
-$role_id = 2;
-$contact_id = 2;
-$creation_date = date("Y-m-d H:i:s");
-$insert_users->execute();
-
-$user_id = 3;
-$role_id = 3;
-$contact_id = 3;
-$creation_date = date("Y-m-d H:i:s");
-$insert_users->execute();
-
-$user_id = 4;
-$role_id = 1;
-$contact_id = 4;
-$creation_date = date("Y-m-d H:i:s");
-$insert_users->execute();
-
-$insert_users->close();
-
-
-
-/* Credentials */
-$insert_credentials = $db_connection->prepare(
-	"INSERT INTO Credentials
-		(username, user_id, password_salted) VALUES(?,?,?);");
-$insert_credentials->bind_param("sis", $username, $user_id, $password_salted);
-$username = "johndoe";
-$user_id = 1;
-$password_salted = crypt("SCSU2024", $salt);
-//$password_salted = password_hash("password123", PASSWORD_DEFAULT);
-$insert_credentials->execute();
-
-$user_id = 2;
-$username = "janesmith";
-$password_salted = crypt("SCSU2025", $salt);
-//$password_salted = password_hash("mypassword", PASSWORD_DEFAULT);
-$insert_credentials->execute();
-
-$user_id = 3;
-$username = "charliebrown";
-$password_salted = crypt("SCSU2026", $salt);
-//$password_salted = password_hash("charlie123", PASSWORD_DEFAULT);
-$insert_credentials->execute();
-
-$user_id = 4;
-$username = "jjmCSC540";
-$password_salted = crypt("SCSU2026", $salt);
-//$password_salted = password_hash("admin123", PASSWORD_DEFAULT);
-$insert_credentials->execute();
-
-$insert_credentials->close();
-
-
-
-
-/* Status Display */
-echo nl2br("The database tables were successfully populated.\r\n");
-/* Return to homepage after 5 seconds */
-header( "refresh:10;url=/csc235_login" );
-
-/* ALWAYS CLOSE THE DB CONNECTION */
+// Status message
+echo nl2br("Database tables were successfully created and populated.\r\n");
+header('Refresh: 10; url=/csc235_login');
 $db_connection->close();
-
-?>

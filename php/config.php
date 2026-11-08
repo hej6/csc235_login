@@ -14,9 +14,7 @@
 
 include_once (ROOT_PATH.'/php/path.php');
 include_once (ROOT_PATH.'/php/reporting.php');
-include_once (ROOT_PATH.'/php/config.local.php');
-
-
+require_once __DIR__ . '/config.local.php';
 
 try {
   $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)

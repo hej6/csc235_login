@@ -45,14 +45,24 @@ $salt = SALT;
 define('DB_SETUP_RUNNING', true);
 echo nl2br("Table creation and seed data initialization started.\r\n");
 
-// Execute in dependency order: referenced tables and records first; Organized by TABLE
+/* Execute in dependency order: referenced tables and records first; Organized by TABLE */
+
+ // USERS (Login to website)
 require __DIR__ . '/database/roles.php';
 require __DIR__ . '/database/contacts.php';
+require __DIR__ . '/database/users.php';
+require __DIR__ . '/database/credentials.php';
+
+// STAFF (Org Chart)
 require __DIR__ . '/database/classification.php';
 require __DIR__ . '/database/organization.php';
 require __DIR__ . '/database/ranks.php';
-require __DIR__ . '/database/users.php';
-require __DIR__ . '/database/credentials.php';
+require __DIR__ . '/database/job.php';
+require __DIR__ . '/database/college.php';
+require __DIR__ . '/database/building.php';
+require __DIR__ . '/database/department.php';
+require __DIR__ . '/database/staff.php';
+
 
 // Status message
 echo nl2br("Database tables were successfully created and populated.\r\n");

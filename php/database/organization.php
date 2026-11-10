@@ -14,5 +14,21 @@ $create_organization = $db_connection->prepare(
 $create_organization->execute();
 $create_organization->close();
 
-/* Below Are Tables That Have Foreign Keys */
-/* ------------------------------------------ */
+// Dummy records
+$seed_stmt = $db_connection->prepare(
+    "INSERT INTO `Organization` (`org_id`, `org_name`) VALUES (?, ?)"
+);
+$seed_rows = [
+    [1, 'Academic Affairs'],
+    [2, 'Information Technology'],
+    [3, 'Student Services'],
+    [4, 'Administration'],
+];
+foreach ($seed_rows as $row) {
+    $org_id = $row[0];
+    $org_name = $row[1];
+    $seed_stmt->bind_param("is", $org_id, $org_name);
+    $seed_stmt->execute();
+}
+$seed_stmt->close();
+

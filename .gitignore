@@ -8,6 +8,7 @@ composer.phar
 .env.local
 .env.*.local
 config/config.local.php
+/php/config.local.php
 config.local.php
 *.secret
 

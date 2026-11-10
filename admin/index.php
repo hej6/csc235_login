@@ -43,6 +43,14 @@ ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
       <p class="lead">This is the <?php echo $_SESSION['user_type'] ?> dashboard.</p>
       <p>Only users with the <?php echo $_SESSION['user_type'] ?> role can access this page.</p>
       </div>
+      <nav aria-label="Org chart management" class="mb-4">
+  <h2>Org Chart Management</h2>
+  <ul class="list-inline">
+    <li class="list-inline-item"><a href="building.php">Manage Buildings</a></li>
+    <li class="list-inline-item"><a href="job.php">Manage Jobs</a></li>
+    <li class="list-inline-item"><a href="staff.php">Manage Staff</a></li>
+  </ul>
+</nav>
       <hr class="mb-4">
       <section class="mb-4">
       <h2>All System Users</h2>

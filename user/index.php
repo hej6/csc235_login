@@ -65,8 +65,8 @@ $college_count = $db_connection->query("SELECT COUNT(*) AS total FROM College")-
       <div class="card text-bg-dark overflow-hidden shadow mb-4">
         <img src="/csc235_login/img/banner.jpg" class="card-img card-img-banner" alt="Campus">
         <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center text-center overlay-dark">
-          <h1 class="display-4">Welcome, <?php echo htmlspecialchars($_SESSION['user_first']); ?>!</h1>
-          <p class="lead">Explore staff, colleges, and ranks.</p>
+          <h1 class="display-4">Welcome, <?php echo htmlspecialchars($_SESSION['user_first']); ?></h1>
+          <p class="lead">Explore who's who at Wossamotta U! </p>
         </div>
       </div>
 

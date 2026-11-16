@@ -16,7 +16,7 @@ ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
   include_once (realpath(dirname(__FILE__, 2).'/php/path.php')); // Path will be included in header.php
   // Session will be included in header.php
 
-  
+
 $page_name = "Staff Directory"; // Set page name for active link in header
 
 include_once (ROOT_PATH . '/php/config.php');
@@ -78,7 +78,7 @@ function sortLink($col, $label, $sort, $dir) {
   return '<a class="text-white text-decoration-none" href="?' . htmlspecialchars($query) . '">' . $label . $arrow . '</a>';
 }
 
-// ---- Run the query ----
+// ---- Run the query ----///////////////////
 $sql = "SELECT * FROM vw_staff_directory"
      . ($where ? " WHERE " . implode(" AND ", $where) : "")
      . " ORDER BY " . $sortable[$sort][1] . " $dir";

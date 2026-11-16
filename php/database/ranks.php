@@ -23,12 +23,12 @@ $seed_stmt = $db_connection->prepare(
     "INSERT INTO `Ranks` (`ranks_id`, `ranks_title`, `min_salary`, `max_salary`, `class_id`) VALUES (?, ?, ?, ?, ?)"
 );
 $seed_rows = [
-    [1, 'Executive Level', '120000.00', '200000.00', 1],
-    [2, 'Director Level', '85000.00', '140000.00', 2],
-    [3, 'Manager Level', '65000.00', '110000.00', 2],
-    [4, 'Professional Level', '45000.00', '90000.00', 3],
-    [5, 'Faculty Level', '55000.00', '120000.00', 4],
-    [6, 'Support Level', '35000.00', '65000.00', 5],
+    [1, 'VI', '120000.00', '200000.00', 1],
+    [2, 'V', '85000.00', '140000.00', 2],
+    [3, 'IV', '65000.00', '110000.00', 2],
+    [4, 'III', '45000.00', '90000.00', 3],
+    [5, 'II', '55000.00', '120000.00', 4],
+    [6, 'I', '35000.00', '65000.00', 5],
 ];
 foreach ($seed_rows as $row) {
     $ranks_id = $row[0];

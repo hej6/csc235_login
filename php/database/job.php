@@ -21,16 +21,23 @@ $seed_rows = [
     [2, 'Provost'],
     [3, 'Chief Information Officer'],
     [4, 'IT Director'],
-    [5, 'Systems Administrator'],
-    [6, 'Software Developer'],
+    [5, 'IT Support Specialist'],
+    [6, 'Coach'],
     [7, 'Dean'],
     [8, 'Professor'],
     [9, 'Registrar'],
     [10, 'Academic Advisor'],
     [11, 'Human Resources Director'],
-    [12, 'Human Resources Specialist'],
+    [12, 'Administrative Specialist'],
     [13, 'Library Director'],
     [14, 'Librarian'],
+    [15, 'Athletic Director'],
+    [16, 'Head Coach'],
+    [17, 'Athletic Trainer'],
+    [18, 'Student Success Director'],
+    [19, 'Career Services Director'],
+    [20, 'Career Counselor'],
+    [21, 'Department Chair']
 ];
 foreach ($seed_rows as $row) {
     $job_id = $row[0];

@@ -22,7 +22,7 @@ $seed_rows = [
     [2, 'Artemis Technology Center'],
     [3, 'Hoot Academic Hall'],
     [4, 'Jared He Student Center'],
-    [5, 'Guzmann-Melendez Welcome Center'],
+    [5, 'Guzmann-Melendez Gymnasium'],
     [6, 'Connor Library'],
     [7, 'Isabella Fine Arts Pavillion']
     

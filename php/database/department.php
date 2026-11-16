@@ -28,9 +28,23 @@ $seed_rows = [
     [4, 'Computer Science', 1, 3],
     [5, 'Registrar',4, 1],
     [6, 'Human Resources', 4, 1],
-    [7, 'Business Administration', 1, 5],
+    [7, 'Business Administration', 1, 1],
     [8, 'Student Success', 3, 4],
-    [9, 'Career Center', 3, 6]
+    [9, 'Career Center', 3, 6],
+    [10, 'Athletics', 5, 5],
+    [11, 'Fine Arts', 1, 7],
+    [12, 'English', 1, 3],
+    [13, 'History', 1, 3],
+    [14, 'Mathematics', 1, 3],
+    [15, 'Biology', 1, 2],
+    [16, 'Chemistry', 1, 2],
+    [17, 'Physics', 1, 2],
+    [18, 'Psychology', 1, 3],
+    [19, 'Music', 1, 7],
+    [20, 'Theatre', 1, 7],
+    [21, 'Nursing', 1, 3],
+    [22, 'Education', 1, 3],
+
 ];
 foreach ($seed_rows as $row) {
     $dept_id = $row[0];

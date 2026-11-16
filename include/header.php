@@ -2,10 +2,10 @@
 /**
  * Header Include File
  *
- * @author    Joshua Connor <connorj4@southernct.edu>
+ * @author    Jackie Isabella <isabellaj2@southernct.edu>
  * @copyright 2026 
- * @date      2026-02-24
- * @version   1.0
+ * @date      2026-11-16
+ * @version   2.0
  */
 // 
 if (!isset($_SESSION)) {
@@ -48,10 +48,17 @@ if (!isset($_SESSION)) {
         ?>
         <?php
           /* User Information */
-          if (isset($_SESSION['user_name']) && $_SESSION['user_role'] == 2) { // Only display when user is logged in
-            echo '<li class="nav-item"><a class="nav-link" href="index.php">User Dashboard</a></li>';
-            echo '<li class="nav-item"><a class="nav-link" href="test.php">Test</a></li>';
-          }
+          if (isset($_SESSION['user_name']) && $_SESSION['user_role'] == 2) {
+            echo '<li class="nav-item"><a class="nav-link" href="/csc235_login/user/index.php">User Dashboard</a></li>';
+            echo '<li class="nav-item dropdown">';
+            echo '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Browse</a>';
+            echo '<ul class="dropdown-menu">';
+            echo '<li><a class="dropdown-item" href="/csc235_login/user/staff.php">Staff Directory</a></li>';
+            echo '<li><a class="dropdown-item" href="/csc235_login/user/colleges.php">Divisions, Colleges &amp; Departments</a></li>';
+            echo '<li><a class="dropdown-item" href="/csc235_login/user/classifications.php">Classifications &amp; Ranks</a></li>';
+            echo '</ul>';
+            echo '</li>';
+         }
         ?>
         <?php
           /* User Information */

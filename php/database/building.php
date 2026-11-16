@@ -18,12 +18,14 @@ $seed_stmt = $db_connection->prepare(
     "INSERT INTO `Building` (`building_id`, `building_name`) VALUES (?, ?)"
 );
 $seed_rows = [
-    [1, 'Administration Building'],
-    [2, 'Technology Center'],
-    [3, 'Science Hall'],
-    [4, 'Student Services Center'],
-    [5, 'Business Hall'],
-    [6, 'University Library'],
+    [1, 'Wintergreen Administration Building'],
+    [2, 'Artemis Technology Center'],
+    [3, 'Hoot Academic Hall'],
+    [4, 'Jared He Student Center'],
+    [5, 'Guzmann-Melendez Welcome Center'],
+    [6, 'Connor Library'],
+    [7, 'Isabella Fine Arts Pavillion']
+    
 ];
 foreach ($seed_rows as $row) {
     $building_id = $row[0];

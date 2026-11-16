@@ -20,8 +20,8 @@ $seed_stmt = $db_connection->prepare(
 $seed_rows = [
     [1, 'College of Arts and Sciences'],
     [2, 'School of Business'],
-    [3, 'School of Education'],
-    [4, 'School of Health and Human Services'],
+    [3, 'College of Education'],
+    [4, 'College of Health and Human Services'],
 ];
 foreach ($seed_rows as $row) {
     $college_id = $row[0];

@@ -23,13 +23,14 @@ $seed_stmt = $db_connection->prepare(
 );
 $seed_rows = [
     [1, 'Office of the President', 4, 1],
-    [2, 'Academic Leadership', 1, 1],
+    [2, 'Office of the Provost', 1, 1],
     [3, 'Information Technology', 2, 2],
     [4, 'Computer Science', 1, 3],
-    [5, 'Registrar\'s Office', 3, 4],
+    [5, 'Registrar',4, 1],
     [6, 'Human Resources', 4, 1],
     [7, 'Business Administration', 1, 5],
-    [8, 'Library Services', 1, 6],
+    [8, 'Student Success', 3, 4],
+    [9, 'Career Center', 3, 6]
 ];
 foreach ($seed_rows as $row) {
     $dept_id = $row[0];

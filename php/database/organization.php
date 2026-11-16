@@ -21,8 +21,10 @@ $seed_stmt = $db_connection->prepare(
 $seed_rows = [
     [1, 'Academic Affairs'],
     [2, 'Information Technology'],
-    [3, 'Student Services'],
+    [3, 'Student Affairs'],
     [4, 'Administration'],
+    [5, 'Athletics']
+    
 ];
 foreach ($seed_rows as $row) {
     $org_id = $row[0];

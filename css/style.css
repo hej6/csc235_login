@@ -37,3 +37,37 @@ body {
   padding: 0;
   background-color: #f4f4f4;
 }
+/* //////////////// Landing page cards ////////////
+* Author: Jackie Isabella
+* Date: 2026-11-16
+* Version: 1.0
+*/
+
+/* ---------- Landing page cards ---------- */
+
+/* Banner */
+.card-img-banner { height: 350px; width: 100%; object-fit: cover; }
+.overlay-dark    { background: rgba(0, 0, 0, 0.6); }
+
+/* Three tiles: same image height, same card height */
+.card-img-tile { height: 250px; width: 100%; object-fit: cover; }
+.row > [class*="col-"] > a > .card { height: 100%; }
+
+/* Text band: tint only where the text sits */
+.overlay-light {
+  background: none;
+  padding: 0;
+}
+.overlay-light .text-band {
+  background: rgba(0, 0, 0, 0.65);
+  padding: 0.75rem 1rem;
+}
+.overlay-light .card-title,
+.overlay-light .card-text {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Hover lift */
+.card { transition: transform 0.2s; }
+.card:hover { transform: translateY(-5px); }

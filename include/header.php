@@ -2,7 +2,7 @@
 /**
  * Header Include File
  *
- * @author    Jackie Isabella <isabellaj2@southernct.edu>
+ * @author    Jackie Isabella <
  * @copyright 2026 
  * @date      2026-11-16
  * @version   2.0

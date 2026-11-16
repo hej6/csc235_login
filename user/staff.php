@@ -1,6 +1,6 @@
 <?php
 /**
- * Staff Directory
+ * Staff Directory Table
  *
  * @author    Jackie Isabella <isabellaj2@southernct.edu>
  * @copyright 2026 

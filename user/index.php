@@ -60,7 +60,7 @@ ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
     
     <div class="col">
       <div class="mb-6">
-      <h1>Welcome <?php echo $_SESSION['user_first'] ?></h1>
+      <h1>Welcome, <?php echo $_SESSION['user_first'] ?>!</h1>
       <p class="lead">This is the <?php echo $_SESSION['user_type'] ?> dashboard.</p>
       <p>Only users with the  role can access this page.</p>
       </div>

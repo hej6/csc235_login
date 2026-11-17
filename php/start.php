@@ -63,7 +63,31 @@ require __DIR__ . '/database/building.php';
 require __DIR__ . '/database/department.php';
 require __DIR__ . '/database/staff.php';
 
-
+//VIEW FOR USER STAFF DIRECTORY
+/* Views: must run AFTER all tables are created and seeded */
+$db_connection->query(
+    "CREATE OR REPLACE VIEW vw_staff_directory AS
+     SELECT s.staff_id, s.first_name, s.last_name, s.email,
+            j.job_id, j.job_title,
+            cl.class_id, cl.class_name,
+            r.ranks_id, r.ranks_title,
+            o.org_id, o.org_name,
+            d.dept_id, d.dept_name,
+            b.building_id, b.building_name,
+            c.college_id, c.college_name,
+            CONCAT(sup.first_name, ' ', sup.last_name) AS supervisor_name
+     FROM Staff s
+     JOIN Job j              ON s.job_id = j.job_id
+     JOIN Ranks r            ON s.rank_id = r.ranks_id
+     JOIN Classification cl  ON r.class_id = cl.class_id
+     JOIN Organization o     ON s.org_id = o.org_id
+     LEFT JOIN Department d  ON s.dept_id = d.dept_id
+     LEFT JOIN Building b    ON d.building_id = b.building_id
+     LEFT JOIN College c     ON s.college_id = c.college_id
+     LEFT JOIN Staff sup     ON s.supervisor_id = sup.staff_id"
+)) {
+    echo "View error: " . $db_connection->error;
+}
 // Status message
 echo nl2br("Database tables were successfully created and populated.\r\n");
 header('Refresh: 10; url=/org_chart');

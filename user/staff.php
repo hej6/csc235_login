@@ -4,7 +4,7 @@
  *
  * @author    Jackie Isabella <connorj4@southernct.edu>
  * @copyright 2026 
- * @date      2026-02-24
+ * @date      2026-11-16
  * @version   1.0
  */
 error_reporting(E_ALL); // Report all errors
@@ -21,7 +21,7 @@ $page_name = "Staff Directory"; // Set page name for active link in header
 
 include_once (ROOT_PATH . '/php/config.php');
 
-// ---- Dropdown lists (one SQL query per entity) ----
+// Dropdown lists (one SQL query per entity) //////
 function lookup($db, $sql) {
   return $db->query($sql)->fetch_all(MYSQLI_ASSOC);
 }
@@ -35,7 +35,7 @@ $filters = [
   'job_id'      => ['label' => 'Job',            'list' => lookup($db_connection, "SELECT job_id AS id, job_title AS name FROM Job ORDER BY job_title")],
 ];
 
-// ---- Build the WHERE clause from search + filters ----
+//  Build the WHERE clause from search + filters ///////
 $where  = [];
 $types  = '';
 $params = [];
@@ -48,7 +48,7 @@ if ($q !== '') {
   for ($i = 0; $i < 11; $i++) { $types .= 's'; $params[] = "%$q%"; }
 }
 
-foreach ($filters as $col => $f) {      // $col comes from our own list, never from the URL
+foreach ($filters as $col => $f) {      // $col comes from our own list, never from the URL //////
   if (!empty($_GET[$col])) {
     $where[]  = "$col = ?";
     $types   .= 'i';
@@ -56,7 +56,7 @@ foreach ($filters as $col => $f) {      // $col comes from our own list, never f
   }
 }
 
-// ---- Sorting (only allowed columns) ----
+//  Sorting (only allowed columns) ///////
 $sortable = [
   'last_name'     => ['Name',           'last_name, first_name'],
   'job_title'     => ['Job',            'job_title'],
@@ -66,6 +66,7 @@ $sortable = [
   'dept_name'     => ['Department',     'dept_name'],
   'college_name'  => ['College',        'college_name'],
   'building_name' => ['Building',       'building_name'],
+  'supervisor_name' => ['Supervisor',     'supervisor_name'],
 ];
 $sort = array_key_exists($_GET['sort'] ?? '', $sortable) ? $_GET['sort'] : 'last_name';
 $dir  = (($_GET['dir'] ?? 'asc') === 'desc') ? 'DESC' : 'ASC';
@@ -78,10 +79,11 @@ function sortLink($col, $label, $sort, $dir) {
   return '<a class="text-white text-decoration-none" href="?' . htmlspecialchars($query) . '">' . $label . $arrow . '</a>';
 }
 
-// ---- Run the query ----///////////////////
+//  *****Run the query***** ///////////////////
 $sql = "SELECT * FROM vw_staff_directory"
-     . ($where ? " WHERE " . implode(" AND ", $where) : "")
-     . " ORDER BY " . $sortable[$sort][1] . " $dir";
+     . ($where ? " WHERE " . implode(" AND ", $where) : "");
+$orderCols = array_map(fn($c) => trim($c) . " $dir", explode(',', $sortable[$sort][1]));
+$sql .= " ORDER BY " . implode(', ', $orderCols);
 $stmt = $db_connection->prepare($sql);
 if ($params) { $stmt->bind_param($types, ...$params); }
 $stmt->execute();
@@ -134,7 +136,6 @@ $result = $stmt->get_result();
               <?php foreach ($sortable as $col => $s): ?>
                 <th><?php echo sortLink($col, $s[0], $sort, $dir); ?></th>
               <?php endforeach; ?>
-              <th>Supervisor</th>
             </tr>
           </thead>
           <tbody>

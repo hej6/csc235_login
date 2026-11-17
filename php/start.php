@@ -34,10 +34,10 @@ $db_connection->query('SET foreign_key_checks = 0');
 if ($result = $db_connection->query("SHOW TABLES")) {
   while($row = $result->fetch_array(MYSQLI_NUM)) {
     $db_connection->query('DROP TABLE IF EXISTS '.$row[0]);
-	}
-	echo "Tables removed successfully." . nl2br("\r\n");
+    }
+    echo "Tables removed successfully." . nl2br("\r\n");
 } else {
-	echo "No tables were removed." . nl2br("\r\n");
+    echo "No tables were removed." . nl2br("\r\n");
 }
 $db_connection->query('SET foreign_key_checks = 1');
 
@@ -85,9 +85,8 @@ $db_connection->query(
      LEFT JOIN Building b    ON d.building_id = b.building_id
      LEFT JOIN College c     ON s.college_id = c.college_id
      LEFT JOIN Staff sup     ON s.supervisor_id = sup.staff_id"
-)) {
-    echo "View error: " . $db_connection->error;
-}
+);
+
 // Status message
 echo nl2br("Database tables were successfully created and populated.\r\n");
 header('Refresh: 10; url=/org_chart');

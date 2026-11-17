@@ -38,6 +38,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
 <?php /* Application Custom Styles */ ?>
-<link href="/csc235_login/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/org_chart/css/style.css" rel="stylesheet" type="text/css" />
 
 

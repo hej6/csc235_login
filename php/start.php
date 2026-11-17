@@ -66,5 +66,5 @@ require __DIR__ . '/database/staff.php';
 
 // Status message
 echo nl2br("Database tables were successfully created and populated.\r\n");
-header('Refresh: 10; url=/csc235_login');
+header('Refresh: 10; url=/org_chart');
 $db_connection->close();

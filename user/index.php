@@ -63,7 +63,7 @@ $college_count = $db_connection->query("SELECT COUNT(*) AS total FROM College")-
 
       <!-- Banner -->
       <div class="card text-bg-dark overflow-hidden shadow mb-4">
-        <img src="/csc235_login/img/banner.jpg" class="card-img card-img-banner" alt="Campus">
+        <img src="/org_chart/img/banner.jpg" class="card-img card-img-banner" alt="Campus">
         <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center text-center overlay-dark">
           <h1 class="display-4">Welcome, <?php echo htmlspecialchars($_SESSION['user_first']); ?></h1>
           <p class="display-6">Explore who's who at Wossamotta U </p>
@@ -74,9 +74,9 @@ $college_count = $db_connection->query("SELECT COUNT(*) AS total FROM College")-
       <div class="row g-4">
 
         <div class="col-md-4">
-          <a href="/csc235_login/user/staff.php" class="text-decoration-none">
+          <a href="/org_chart/user/staff.php" class="text-decoration-none">
             <div class="card text-bg-dark overflow-hidden shadow">
-              <img src="/csc235_login/img/staff.jpg" class="card-img card-img-tile" alt="Staff Directory">
+              <img src="/org_chart/img/staff.jpg" class="card-img card-img-tile" alt="Staff Directory">
               <div class="card-img-overlay d-flex flex-column justify-content-end overlay-light">
                 <div class="text-band">
                   <h4 class="card-title">Staff Directory</h4>
@@ -88,9 +88,9 @@ $college_count = $db_connection->query("SELECT COUNT(*) AS total FROM College")-
         </div>
 
         <div class="col-md-4">
-          <a href="/csc235_login/user/colleges.php" class="text-decoration-none">
+          <a href="/org_chart/user/colleges.php" class="text-decoration-none">
             <div class="card text-bg-dark overflow-hidden shadow">
-              <img src="/csc235_login/img/colleges.jpg" class="card-img card-img-tile" alt="Divisions and Departments">
+              <img src="/org_chart/img/colleges.jpg" class="card-img card-img-tile" alt="Divisions and Departments">
               <div class="card-img-overlay d-flex flex-column justify-content-end overlay-light">
                 <div class="text-band">
                   <h4 class="card-title">Divisions &amp; Departments</h4>
@@ -102,9 +102,9 @@ $college_count = $db_connection->query("SELECT COUNT(*) AS total FROM College")-
         </div>
 
         <div class="col-md-4">
-          <a href="/csc235_login/user/classifications.php" class="text-decoration-none">
+          <a href="/org_chart/user/classifications.php" class="text-decoration-none">
             <div class="card text-bg-dark overflow-hidden shadow">
-              <img src="/csc235_login/img/classifications.jpg" class="card-img card-img-tile" alt="Classifications and Ranks">
+              <img src="/org_chart/img/classifications.jpg" class="card-img card-img-tile" alt="Classifications and Ranks">
               <div class="card-img-overlay d-flex flex-column justify-content-end overlay-light">
                 <div class="text-band">
                   <h4 class="card-title">Classifications &amp; Ranks</h4>
